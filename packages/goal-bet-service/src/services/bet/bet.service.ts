@@ -45,8 +45,8 @@ export class BetService {
         const old = this.bets[findIndex];
 
         this.bets[findIndex] = {
-            ...payload,
             ...old,
+            ...payload,
         }
     }
 

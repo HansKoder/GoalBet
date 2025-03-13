@@ -6,42 +6,43 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BetService = void 0;
+exports.MatchesService = void 0;
 const common_1 = require("@nestjs/common");
-let BetService = class BetService {
-    bets = [];
-    idx = -1;
+let MatchesService = class MatchesService {
+    id = -1;
+    matches = [];
     findAll() {
-        return this.bets;
-    }
-    findOne(id) {
-        const find = this.bets.find(bet => bet.id == id);
-        if (!find)
-            throw new common_1.NotFoundException(`The Bet with the ID ${id} does not found`);
-        return find;
+        return this.matches;
     }
     create(payload) {
-        this.idx += 1;
-        const data = {
-            id: this.idx,
+        this.id++;
+        const entity = {
+            id: this.id,
             ...payload
         };
-        this.bets.push(data);
-        return data;
+        this.matches.push(entity);
+        return entity;
+    }
+    findOne(id) {
+        const find = this.matches.find(m => m.id == id);
+        if (!find)
+            throw new common_1.NotFoundException(`The match with the ID ${id} is not found`);
+        return find;
     }
     update(payload, id) {
-        const findIndex = this.bets.findIndex(bet => bet.id == id);
+        const findIndex = this.matches.findIndex(m => m.id == id);
         if (findIndex == -1)
-            throw new common_1.NotFoundException(`The Bet with the ID ${id} does not found`);
-        const old = this.bets[findIndex];
-        this.bets[findIndex] = {
+            throw new common_1.NotFoundException(`The match with the ID ${id} is not found`);
+        const old = this.matches[findIndex];
+        this.matches[findIndex] = {
             ...old,
             ...payload,
         };
+        return this.matches[findIndex];
     }
 };
-exports.BetService = BetService;
-exports.BetService = BetService = __decorate([
+exports.MatchesService = MatchesService;
+exports.MatchesService = MatchesService = __decorate([
     (0, common_1.Injectable)()
-], BetService);
-//# sourceMappingURL=bet.service.js.map
+], MatchesService);
+//# sourceMappingURL=matches.service.js.map

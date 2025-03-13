@@ -12,14 +12,16 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const bet_controller_1 = require("./controllers/bet/bet.controller");
 const bet_service_1 = require("./services/bet/bet.service");
+const matches_controller_1 = require("./controllers/matches/matches.controller");
+const matches_service_1 = require("./services/matches/matches.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
-        controllers: [app_controller_1.AppController, bet_controller_1.BetController],
-        providers: [app_service_1.AppService, bet_service_1.BetService],
+        controllers: [app_controller_1.AppController, bet_controller_1.BetController, matches_controller_1.MatchesController],
+        providers: [app_service_1.AppService, bet_service_1.BetService, matches_service_1.MatchesService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
