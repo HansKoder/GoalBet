@@ -1,0 +1,22 @@
+meta {
+  name: UpdateBet
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/v1/bet/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "match": "Champions League - Liverpool (l) vs PSG (v)",
+    "user": "hans.arias",
+    "scoreLocalTeam": 1,
+    "scoreVisitingTeam": 3,
+    "statusMatch": "Finished",
+    "amount": 100
+  }
+}
