@@ -4,19 +4,14 @@ meta {
   seq: 4
 }
 
-post {
-  url: http://localhost:3000/api/v1/bet/create
+put {
+  url: http://localhost:3000/api/v1/bet/update/0
   body: json
   auth: none
 }
 
 body:json {
   {
-    "match": "Champions League - Liverpool (l) vs PSG (v)",
-    "user": "hans.arias",
-    "scoreLocalTeam": 1,
-    "scoreVisitingTeam": 3,
-    "statusMatch": "Finished",
-    "amount": 100
+    "amount": 50
   }
 }
