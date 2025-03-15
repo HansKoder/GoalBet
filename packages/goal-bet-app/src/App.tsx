@@ -2,16 +2,14 @@ import './App.css'
 
 import { Header } from './ components/Header'
 import { ClaimBonus } from './ components/ClaimBonus'
-import { Match } from "./ components/Match"
-import { Bet } from "./ components/Bet";
+import { MatchesList } from './ components/MatchesList';
 
 function App() {
   return (
     <>
       <Header/>
       <ClaimBonus />
-      <Bet />
-      <Match />
+      <MatchesList />
     </>
   )
 }
