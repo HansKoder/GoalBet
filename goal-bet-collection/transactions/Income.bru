@@ -1,0 +1,19 @@
+meta {
+  name: Income
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/v1/transactions/income
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+   "userId": "b67f9376-0716-4b09-85ef-628220d3db19",
+    "description": "Claim Welcome Bonus",
+    "amount": 10
+  }
+}

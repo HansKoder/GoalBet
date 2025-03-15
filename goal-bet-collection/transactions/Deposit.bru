@@ -1,0 +1,19 @@
+meta {
+  name: Deposit
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3000/api/v1/transactions/deposit
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+   "userId": "b67f9376-0716-4b09-85ef-628220d3db19",
+    "description": "Bet loss - 01",
+    "amount": 5
+  }
+}
