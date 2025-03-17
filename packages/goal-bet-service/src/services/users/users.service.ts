@@ -1,13 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from 'src/dtos/CreateUser.dto';
 import { User } from 'src/entities/User';
+import { UserRepository } from 'src/repositories/User.repository';
 
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class UsersService {
 
-    private users : User[] = []
+    private repository : UserRepository = UserRepository.getInstance();
 
     create (payload: CreateUserDto): User {
         const entity: User = {
@@ -15,17 +16,17 @@ export class UsersService {
             ...payload
         }
 
-        this.users.push(entity);
+        this.repository.save(entity);
 
         return entity;
     }
 
     findByUUID (uuid: string) {
-        const find = this.users.find(item => item.uuid == uuid);
+        const user = this.repository.getUserPerUUID(uuid);
 
-        if (!find) 
+        if (!user) 
             throw new NotFoundException(`The user with the UUID ${uuid} is not found`)
 
-        return find;
+        return user;
     }
 }
