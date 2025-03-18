@@ -43,6 +43,7 @@ export const ProfileWallet  = () => {
             }
 
             console.log(`[INFO] Login credential ${JSON.stringify(response)}`);
+            localStorage.setItem('profile', JSON.stringify(response.data));
             setProfile(response.data);
         }
 

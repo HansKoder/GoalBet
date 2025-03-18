@@ -1,9 +1,50 @@
 import { useState } from "react";
 
+import { useNotif } from '../context/NotifContext';
+import to from "await-to-js";
+import api from "../utils/Api";
+
+interface Income {
+    userId: string;
+    description: string;
+    amount: number;
+}
+
 export const ClaimBonus = () => {
+
+    const notif = useNotif();
 
     const [isOpen, setOpen] = useState<boolean>(false);
     const [isChecked, setIsChecked] = useState(false);
+
+    const onClaimBonus = async () => {
+
+        const userParam = localStorage.getItem('profile');
+        
+        if (!userParam || userParam == null) {
+            notif.error('Invalid Section, you must be logged');
+            return;
+        }
+
+        const user = JSON.parse(userParam);
+
+        const claimBonus : Income = {
+            userId: user.uuid,
+            description: 'Claim Welcome Bonus',
+            amount: 10
+        }
+
+        const URL = '/api/v1/transactions/income';
+        const [err] = await to(api.post(URL, claimBonus));
+        if (err) {
+            console.log(`[ERROR] The transaction is not successful, Error Detailed ${err.message}`);
+            notif.error('Please, contact with the Admin, Error with the System');
+            return;
+        }
+
+        setOpen(false)
+        notif.success('Congratulations! You have received a $10 bonus');
+    }
 
     return (
         <>
@@ -59,6 +100,7 @@ export const ClaimBonus = () => {
                                 className={`w-full py-2 rounded-lg text-2xl text-white font-black transition-all ${isChecked ? "bg-[#18631B] hover:bg-green-600" : "bg-gray-600 cursor-not-allowed"
                                     }`}
                                 disabled={!isChecked}
+                                onClick={onClaimBonus}
                             >
                                 Claim Bonus
                             </button>
