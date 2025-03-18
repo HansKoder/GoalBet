@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../utils/Api";
 import to from "await-to-js";
 
+import { useNotif } from '../context/NotifContext';
+
 interface Profile {
     uuid: string;
     name: string;
@@ -10,10 +12,11 @@ interface Profile {
     wallet: number;
 }
 
-
 export const ProfileWallet  = () => {
 
     const [profile, setProfile] = useState<Profile>();
+
+    const notif = useNotif();
 
     useEffect(() => {
         
@@ -30,6 +33,7 @@ export const ProfileWallet  = () => {
             const [err, response] = await to(api.post<Profile>(url, credential))
             if (err) {
                 console.log(`[ERROR] Login API is failured ${err.message}`);
+                notif.error(`You need to contact with admin, there is a any error with the service`);
                 return;
             }
 
@@ -39,7 +43,6 @@ export const ProfileWallet  = () => {
             }
 
             console.log(`[INFO] Login credential ${JSON.stringify(response)}`);
-        
             setProfile(response.data);
         }
 
