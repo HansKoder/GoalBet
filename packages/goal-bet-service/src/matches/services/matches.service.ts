@@ -1,16 +1,24 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { CreateMatchDto } from 'src/matches/dtos/CreateMatch.dto';
 import { Match } from 'src/matches/entities/Match';
 import { updateMatchDto } from '../dtos/UpdateMatch.dto';
 
+import { ConfigType } from '@nestjs/config';
+import config from '../../config';
+
 @Injectable()
 export class MatchesService {
+
+    constructor(@Inject(config.KEY) private configService: ConfigType<typeof config>) {}
 
     private id: number = -1;
 
     private matches: Match[] = [];
 
     findAll (): Match[] {
+        const apiKey = this.configService.API_KEY; 
+        const databaseName = this.configService.DATABASE.DATABASE_NAME;
+        console.log(`[INFO] API KEY ${apiKey} - DATABASE NAME ${databaseName}`);
         return this.matches;
     }
 

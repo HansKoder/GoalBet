@@ -9,9 +9,25 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { UsersModule } from './users/users.module';
 import { LoginModule } from './login/login.module';
 
+import { ConfigModule } from '@nestjs/config'
+import { environment } from './environment';
+
+import config from './config';
+
 @Module({
-  imports: [BetModule, MatchesModule, TransactionsModule, UsersModule, LoginModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: environment.PROD || '.env',
+      isGlobal: true,
+      load: [config]
+    }),
+    BetModule, 
+    MatchesModule, 
+    TransactionsModule, 
+    UsersModule, 
+    LoginModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
