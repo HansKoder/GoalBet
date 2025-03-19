@@ -1,4 +1,6 @@
 import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
+import { ApiProperty } from '@nestjs/swagger';
+import { StatusMatch } from "src/matches/enums/StatusMatch.enum";
 
 export class CreateBetDto {
 
@@ -18,7 +20,12 @@ export class CreateBetDto {
     @IsPositive()
     readonly scoreVisitingTeam: number;
 
-    @IsNotEmpty()
+    @ApiProperty({ 
+        description: 'Estado del partido', 
+        enum: StatusMatch,
+        example: StatusMatch.Finished
+      })
+    @IsNotEmpty()    
     readonly statusMatch: StatusMatch;
 
     @IsNumber()

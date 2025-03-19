@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { CreateMatchDto } from 'src/matches/dtos/CreateMatch.dto';
-import { Match } from 'src/matches/entities/Match';
+import { Match } from 'src/matches/entities/Match.entity';
 import { updateMatchDto } from '../dtos/UpdateMatch.dto';
 
 import { ConfigType } from '@nestjs/config';
@@ -18,6 +18,7 @@ export class MatchesService {
     findAll (): Match[] {
         const apiKey = this.configService.API_KEY; 
         const databaseName = this.configService.DATABASE.DATABASE_NAME;
+        console.log(`Env ${process.env.NODE_ENV}`);
         console.log(`[INFO] API KEY ${apiKey} - DATABASE NAME ${databaseName}`);
         return this.matches;
     }

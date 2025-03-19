@@ -1,4 +1,7 @@
-import { IsDate, IsDateString, IsNotEmpty, IsString } from "class-validator";
+import { IsDateString, IsNotEmpty, IsString } from "class-validator";
+
+import { ApiProperty } from '@nestjs/swagger';
+import { StatusMatch } from "../enums/StatusMatch.enum";
 
 export class CreateMatchDto {
 
@@ -17,6 +20,11 @@ export class CreateMatchDto {
     @IsDateString()
     readonly dateMatch: Date;
 
+    @ApiProperty({ 
+        description: 'Current status about match', 
+        enum: StatusMatch,
+        example: StatusMatch.Pending 
+      })
     @IsNotEmpty()
     readonly statusMatch: StatusMatch;
 

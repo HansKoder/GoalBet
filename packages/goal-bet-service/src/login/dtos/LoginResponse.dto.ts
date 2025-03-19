@@ -1,4 +1,4 @@
-class LoginResponseDto {
+export class LoginResponseDto {
 
     uuid: string;
     documentNumber : string;

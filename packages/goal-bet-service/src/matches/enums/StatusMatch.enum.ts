@@ -1,4 +1,4 @@
-enum StatusMatch {
+export enum StatusMatch {
     Pending,
     Playing,
     Finished,
